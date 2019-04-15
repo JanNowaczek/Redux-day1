@@ -1,11 +1,22 @@
 import React from 'react'
 
-import './store'
+import { sendMessage } from './store'
 
-const App = (props) => (
-  <div>
-
-  </div>
-)
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <button
+          onClick={() => sendMessage(
+            prompt(),
+            prompt()
+          )}
+        >
+          SEND MESSAGE
+    </button>
+      </div>
+    )
+  }
+}
 
 export default App

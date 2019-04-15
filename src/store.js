@@ -21,7 +21,7 @@ console.log(message1, message2)
 store.dispatch(message1)
 store.dispatch(message2)
 
-window.sendMessage = (receiver, text) => (
+export const sendMessage = (receiver, text) => (
     store.dispatch(
         sendActionCreator(receiver, text)
     )
