@@ -1,19 +1,59 @@
 import React from 'react'
 
-import { sendMessage } from './store'
+import './store'
+import { store } from './store'
+import { sendActionCreator } from './state/messages'
 
 class App extends React.Component {
+  state = {
+    messages: []
+  }
+
+  prepareMessage = () => {
+    const receiver = prompt('Wpisz odbiorcę')
+    const text = prompt('Wpisz tekst wiadomości')
+
+    const message = sendActionCreator(receiver, text)
+
+    this.setState ({
+      messages: this.state.messages.concat(message)
+    })
+  }
+
+  sendMessages = () => {
+    this.state.messages.forEach(
+      message => store.dispatch(message)
+    )
+
+    this.setState({messages: [] })
+  }
+
   render() {
     return (
       <div>
         <button
-          onClick={() => sendMessage(
-            prompt(),
-            prompt()
-          )}
+          onClick={this.prepareMessage}
         >
-          SEND MESSAGE
-    </button>
+          PREPARE MESSAGE
+        </button>
+        <button
+          onClick={this.sendMessages}
+        >
+          SEND MESSAGES
+        </button>
+        <div>
+          {
+            this.state.messages.map(
+              (message, i) => (
+                <div
+                  key={i + message.text}
+                >
+                  {message.receiver} | {message.text}
+                </div>
+              ) 
+            )
+          }
+        </div>
       </div>
     )
   }
