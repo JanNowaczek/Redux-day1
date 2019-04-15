@@ -1,6 +1,6 @@
 const SEND = 'message/SEND'
 
-const sendActionCreator = (receiver, text) => ({
+export const sendActionCreator = (receiver, text) => ({
     type: SEND,
     receiver, 
     text,
