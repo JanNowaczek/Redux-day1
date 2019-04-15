@@ -1,43 +1,15 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
-const initialState = {
-    number: 0,
-}
+import counterReducer, { incActionCreator, decActionCreator } from './state/counter'
 
-const reducer = (state = initialState, action) => {
-    console.log(state, action)
-
-    if(action.type === 'INC'){
-        return {
-            ...state,
-            number: state.number + 1
-        }
-
-    }
-
-    if(action.type === 'DEC'){
-        return {
-            ...state,
-            number: state.number - 1
-        }
-    }
-    
-    return state
-}
-
+const reducer = combineReducers({
+    counter: counterReducer,
+})
 
 export const store = createStore(
     reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-const incAction = {
-    type: 'INC'
-}
-
-const decAction = {
-    type: 'DEC'
-}
-
-store.dispatch(incAction)
-store.dispatch(decAction)
+store.dispatch(incActionCreator())
+store.dispatch(decActionCreator())
