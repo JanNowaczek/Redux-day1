@@ -1,7 +1,26 @@
 import { createStore } from 'redux'
 
-const reducer = () => {}
+const initialState = {
+    number: 0,
+}
 
-export const store = createStore(reducer)
+const reducer = (state = initialState, action) => {
+    console.log(state, action)
+    if(action.type === 'INC'){
+        return {
+            ...state,
+            number: state.number + 1
+        }
+    }
+}
 
-console.log(store)
+export const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+const incAction = {
+    type: 'INC'
+}
+
+store.dispatch(incAction)
