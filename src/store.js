@@ -6,12 +6,15 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     console.log(state, action)
+
     if(action.type === 'INC'){
         return {
             ...state,
             number: state.number + 1
         }
     }
+
+    return state
 }
 
 export const store = createStore(
